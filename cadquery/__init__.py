@@ -2,6 +2,10 @@
 
 This module exposes the primary CadQuery API for creating 3D models
 using a fluent, chainable interface.
+
+Personal fork notes:
+- Using this for learning OCCT and parametric modeling
+- Main branch tracks upstream CadQuery/cadquery
 """
 
 from .cq import CQ, Workplane
