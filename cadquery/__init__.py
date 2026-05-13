@@ -1,80 +1,102 @@
-from importlib.metadata import version, PackageNotFoundError
+"""CadQuery - A parametric 3D CAD scripting framework built on top of OCCT.
 
-try:
-    __version__ = version("cadquery")
-except PackageNotFoundError:
-    # package is not installed
-    __version__ = "2.8.0dev"
+This module exposes the primary CadQuery API for creating 3D models
+using a fluent, chainable interface.
+"""
 
-# these items point to the OCC implementation
-from .occ_impl.geom import Plane, BoundBox, Vector, Matrix, Location
+from .cq import CQ, Workplane
+from .occ_impl.geom import Vector, Matrix, Plane, Location
 from .occ_impl.shapes import (
     Shape,
     Vertex,
     Edge,
-    Face,
     Wire,
-    Solid,
+    Face,
     Shell,
+    Solid,
     Compound,
-    sortWiresByBuildOrder,
+    CompSolid,
 )
-from .occ_impl import exporters
-from .occ_impl import importers
-
-# these items are the common implementation
-
-# the order of these matter
+from .occ_impl.assembly import (
+    Assembly,
+    Constraint,
+)
 from .selectors import (
+    Selector,
     NearestToPointSelector,
     ParallelDirSelector,
     DirectionSelector,
     PerpendicularDirSelector,
     TypeSelector,
     DirectionMinMaxSelector,
+    RadiusNthSelector,
+    CenterNthSelector,
+    DirectionNthSelector,
+    LengthNthSelector,
+    AreaNthSelector,
+    BinarySelector,
+    AndSelector,
+    SumSelector,
+    SubtractSelector,
+    InverseSelector,
     StringSyntaxSelector,
-    Selector,
 )
 from .sketch import Sketch
-from .cq import CQ, Workplane
-from .assembly import Assembly, Color, Constraint, Material
-from . import selectors
-from . import plugins
+from .cq_types import Real, VectorLike
+from . import exporters, importers
 
+# Package metadata
+__version__ = "2.4.0"
+__author__ = "CadQuery Contributors"
+__license__ = "Apache License 2.0"
 
 __all__ = [
+    # Core workplane
     "CQ",
     "Workplane",
-    "Assembly",
-    "Color",
-    "Constraint",
-    "Material",
-    "plugins",
-    "selectors",
-    "Plane",
-    "BoundBox",
-    "Matrix",
+    # Geometry primitives
     "Vector",
+    "Matrix",
+    "Plane",
     "Location",
-    "sortWiresByBuildOrder",
+    # Shapes
     "Shape",
     "Vertex",
     "Edge",
     "Wire",
     "Face",
-    "Solid",
     "Shell",
+    "Solid",
     "Compound",
-    "exporters",
-    "importers",
+    "CompSolid",
+    # Assembly
+    "Assembly",
+    "Constraint",
+    # Selectors
+    "Selector",
     "NearestToPointSelector",
     "ParallelDirSelector",
     "DirectionSelector",
     "PerpendicularDirSelector",
     "TypeSelector",
     "DirectionMinMaxSelector",
+    "RadiusNthSelector",
+    "CenterNthSelector",
+    "DirectionNthSelector",
+    "LengthNthSelector",
+    "AreaNthSelector",
+    "BinarySelector",
+    "AndSelector",
+    "SumSelector",
+    "SubtractSelector",
+    "InverseSelector",
     "StringSyntaxSelector",
-    "Selector",
-    "plugins",
+    # Sketch
     "Sketch",
+    # Types
+    "Real",
+    "VectorLike",
+    # Submodules
+    "exporters",
+    "importers",
 ]
