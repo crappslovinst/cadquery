@@ -6,6 +6,7 @@ using a fluent, chainable interface.
 Personal fork notes:
 - Using this for learning OCCT and parametric modeling
 - Main branch tracks upstream CadQuery/cadquery
+- Added cq_version helper for quick version checks in scripts
 """
 
 from .cq import CQ, Workplane
@@ -53,6 +54,12 @@ from . import exporters, importers
 __version__ = "2.4.0"
 __author__ = "CadQuery Contributors"
 __license__ = "Apache License 2.0"
+
+
+def cq_version():
+    """Quick helper to print version info - handy when jumping between envs."""
+    print(f"CadQuery {__version__} | {__license__}")
+
 
 __all__ = [
     # Core workplane
@@ -103,4 +110,6 @@ __all__ = [
     # Submodules
     "exporters",
     "importers",
+    # Helpers
+    "cq_version",
 ]
