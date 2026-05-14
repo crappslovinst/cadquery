@@ -7,6 +7,7 @@ Personal fork notes:
 - Using this for learning OCCT and parametric modeling
 - Main branch tracks upstream CadQuery/cadquery
 - Added cq_version helper for quick version checks in scripts
+- Added cq_version() return value so it can be used in assertions/tests
 """
 
 from .cq import CQ, Workplane
@@ -57,8 +58,14 @@ __license__ = "Apache License 2.0"
 
 
 def cq_version():
-    """Quick helper to print version info - handy when jumping between envs."""
-    print(f"CadQuery {__version__} | {__license__}")
+    """Quick helper to print version info - handy when jumping between envs.
+
+    Returns the version string so it can also be used programmatically,
+    e.g. assert '2.4' in cq_version()
+    """
+    version_str = f"CadQuery {__version__} | {__license__}"
+    print(version_str)
+    return version_str
 
 
 __all__ = [
