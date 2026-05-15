@@ -8,6 +8,7 @@ Personal fork notes:
 - Main branch tracks upstream CadQuery/cadquery
 - Added cq_version helper for quick version checks in scripts
 - Added cq_version() return value so it can be used in assertions/tests
+- cq_version() no longer prints by default; use verbose=True if you want output
 """
 
 from .cq import CQ, Workplane
@@ -57,14 +58,17 @@ __author__ = "CadQuery Contributors"
 __license__ = "Apache License 2.0"
 
 
-def cq_version():
-    """Quick helper to print version info - handy when jumping between envs.
+def cq_version(verbose=False):
+    """Quick helper to return version info - handy when jumping between envs.
 
-    Returns the version string so it can also be used programmatically,
+    Returns the version string so it can be used programmatically,
     e.g. assert '2.4' in cq_version()
+
+    Pass verbose=True to also print the version string (old default behavior).
     """
     version_str = f"CadQuery {__version__} | {__license__}"
-    print(version_str)
+    if verbose:
+        print(version_str)
     return version_str
 
 
