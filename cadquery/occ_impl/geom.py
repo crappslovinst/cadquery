@@ -27,6 +27,13 @@ class Vector:
     """A 3D vector with common geometric operations.
 
     Wraps OCC gp_Vec for use in CadQuery operations.
+
+    Examples:
+        >>> v = Vector(1, 0, 0)
+        >>> v.Length()
+        1.0
+        >>> v.normalized()
+        Vector(1.0, 0.0, 0.0)
     """
 
     def __init__(self, *args):
@@ -98,37 +105,8 @@ class Vector:
         """Angle in radians between this vector and another."""
         return self._wrapped.Angle(other._wrapped)
 
-    def __add__(self, other: "Vector") -> "Vector":
-        return self.add(other)
+    def getAngleDegrees(self, other: "Vector") -> float:
+        """Angle in degrees between this vector and another. More convenient than getAngle."""
+        return math.degrees(self._wrapped.Angle(other._wrapped))
 
-    def __sub__(self, other: "Vector") -> "Vector":
-        return self.sub(other)
-
-    def __mul__(self, scale: float) -> "Vector":
-        return self.multiply(scale)
-
-    def __rmul__(self, scale: float) -> "Vector":
-        return self.multiply(scale)
-
-    def __neg__(self) -> "Vector":
-        return self.multiply(-1.0)
-
-    def __abs__(self) -> float:
-        return self.Length()
-
-    def __repr__(self) -> str:
-        return f"Vector({self.x:.4f}, {self.y:.4f}, {self.z:.4f})"
-
-    def __eq__(self, other: object) -> bool:
-        if not isinstance(other, Vector):
-            return NotImplemented
-        return (
-            abs(self.x - other.x) < 1e-9
-            and abs(self.y - other.y) < 1e-9
-            and abs(self.z - other.z) < 1e-9
-        )
-
-    def __iter__(self):
-        yield self.x
-        yield self.y
-        yield self.z
+    def __a
